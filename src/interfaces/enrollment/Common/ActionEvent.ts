@@ -1,0 +1,1 @@
+export type ActionEvent = "Open" | "Modify" | "Delete"

@@ -1,0 +1,23 @@
+[
+
+    { "id": 100, "type": "success", "title": "Success", "message": "Move successful!", "action": "Back To Panel" },
+    { "id": 101, "type": "error", "title": "Error 101", "message": "No SKU selected!", "action": "Back To Panel" },
+    { "id": 102, "type": "error", "title": "Error 102", "message": "No Slots selected!", "action": "Back To Panel" },
+    { "id": 103, "type": "error", "title": "Error 103", "message": "Quantity exceeds Pallet Count!", "action": "Back To Panel" },
+    { "id": 104, "type": "error", "title": "Error 104", "message": "Quantity exceeds Slot Capacity!", "action": "Back To Panel" },
+    { "id": 105, "type": "error", "title": "Error 105", "message": "Slot is disabled", "action": "Back To Panel" },
+    { "id": 106, "type": "error", "title": "Error 106", "message": "Slot reserved for SKU ", "action": "Back To Panel" },
+    { "id": 107, "type": "error", "title": "Error 107", "message": "Slot already in use", "action": "Back To Panel" },
+    { "id": 108, "type": "success", "title": "Success", "message": "Movement Assignment successfully deleted", "action": "Back To Panel" },
+
+    { "id": 201, "type": "success", "title": "Success", "message": "Asn Removed from Queue", "action": "Ok"},
+    { "id": 202, "type": "error", "title": "error", "message": "Failed to Removed Asn from Queue", "action": "Ok"},
+
+    { "id": 301, "type": "error", "title": "Error 301", "message": "Invalid UPC", "action": "Report to Manager" },
+    { "id": 302, "type": "error", "title": "Error 302", "message": "UPC does not match", "action": "Report to Manager" },
+    { "id": 303, "type": "error", "title": "Error 303", "message": "Case count does not match", "action": "Report to Manager" },
+    { "id": 304, "type": "success", "title": "Success", "message": "Task assigned successfully", "action": "Back To Panel"},
+    { "id": 305, "type": "success", "title": "Success", "message": "Receiving successfully completed", "action": "Back To Panel"},
+    { "id": 306, "type": "error", "title": "Error 306", "message": "Invalid Configuration", "action": "Report to Manager" }
+
+]

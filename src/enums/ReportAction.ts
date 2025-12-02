@@ -1,0 +1,11 @@
+export enum ReportAction {
+    FORCERECEIVE = 0,
+    RECEIVE = 1,
+    FILEREPORT = 2,
+    DISMISS = 3,
+    MOVETOHOLDZONE = 4,
+    INVESTIGATE = 5,
+    ACKNOWLEDGE = 6,
+    OVERRIDECONFIGURATION = 7,
+    DISMISSCONFIGURATION = 8,
+}
