@@ -62,6 +62,7 @@ export default function useMove() {
                 StagingCode: currentQueue.StagingCode,
                 UserId: session.user?.UserId,
                 Upc: "68505",
+                SKU: currentQueue.SKU!,
                 // UpdatedBy: session.user?.UserId,
                 PurchaseOrderNumber: currentQueue.PurchaseOrderNumber!,
                 Movement: locationIds.slice(0, quantity).map((locationId) => {

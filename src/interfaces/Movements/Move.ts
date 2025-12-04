@@ -17,7 +17,8 @@ export interface IMovementAssigment {
     Upc: string;
     UpdatedBy: number;
     UserId: number;
-    Movement: IMovement[]
+    Movement: IMovement[];
+    SKU: string;
 }
 
 export interface IAdvanceMovementAssignment {

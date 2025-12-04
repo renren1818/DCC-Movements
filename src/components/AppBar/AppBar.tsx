@@ -32,12 +32,12 @@ export default function AppBar() {
             Distribution Center System
           </Typography>
           <Stack direction={'row'} spacing={1}>
-            <Stack alignItems={'flex-end'}  justifyContent={'center'}>
+            <Stack alignItems={'flex-end'} justifyContent={'center'}>
               <Typography variant="caption" fontWeight={'bold'}>{appBar.user?.DisplayName}</Typography>
               <Typography variant="caption">User {appBar.user?.EmployeeNumber}</Typography>
             </Stack>
             <IconButton
-            size={'small'}
+              size={'small'}
               onClick={appBar.toggleAccount}
             >
               <Avatar />
@@ -96,7 +96,7 @@ export default function AppBar() {
                 >
                   {
                     appBar.user?.Roles.map((role) => (
-                      <MenuItem key={role} value={role}>{role}</MenuItem>    
+                      <MenuItem key={role} value={role}>{role}</MenuItem>
                     ))
                   }
                 </Select>
@@ -110,39 +110,39 @@ export default function AppBar() {
         </Toolbar>
       </MuiAppBar>
 
-      <MuiDrawer open={appBar.drawerOpen} onClose={appBar.toggleDrawer} slotProps={{ paper: { sx: { height: 'calc(100% - 75px)', borderRadius: 2, margin: '70px 0px 0px 5px'}}}}>
-          <Box sx={{ width: appBar.isTablet ? '50vw' : '33vw', zoom: appBar.isTablet ? 0.7 : 1 }}>
-            <Stack>
-              {
-                appBar.menu.map((menu: IMenu) => 
-                  <Box key={menu.name} margin={2}>
-                    <Typography variant="h5" color="primary" fontWeight={'bold'}>{menu.name}</Typography>
-                    <Grid container sx={{ m: 5 }}>
-                      {
-                        menu.items.map((item: ISubMenu) => 
-                          <Grid key={item.name} size={4} maxWidth={400}>
-                            
-                              <Stack alignItems={'center'} textAlign={'center'} width={130}>
-                                <Badge color="error" badgeContent={item.badge ? " " : undefined} overlap="circular">
-                                  <IconButton onClick={() => appBar.menuClick(item.route)}>
-                                    <Icon sx={{ marginBottom: 2, padding: 1, fontSize: 50, borderRadius: '50%', outline: `10px solid ${menu.color}` }}>
-                                      {item.icon}
-                                    </Icon>
-                                  </IconButton>
-                                </Badge>
-                                <Typography>{item.name}</Typography>
-                              </Stack>
-                          </Grid>
-                        )
-                      }
-                    </Grid>
-                    <Divider />
-                  </Box>
-                )
+      <MuiDrawer open={appBar.drawerOpen} onClose={appBar.toggleDrawer} slotProps={{ paper: { sx: { height: 'calc(100% - 75px)', borderRadius: 2, margin: '70px 0px 0px 5px' } } }}>
+        <Box sx={{ width: appBar.isTablet ? '50vw' : '33vw', zoom: appBar.isTablet ? 0.7 : 1 }}>
+          <Stack>
+            {
+              appBar.menu.map((menu: IMenu) =>
+                <Box key={menu.name} margin={2}>
+                  <Typography variant="h5" color="primary" fontWeight={'bold'}>{menu.name}</Typography>
+                  <Grid container sx={{ m: 5 }}>
+                    {
+                      menu.items.map((item: ISubMenu) =>
+                        <Grid key={item.name} size={4} maxWidth={400}>
 
-              }
-            </Stack>
-          </Box>
+                          <Stack alignItems={'center'} textAlign={'center'} width={130}>
+                            <Badge color="error" badgeContent={item.badge ? " " : undefined} overlap="circular">
+                              <IconButton onClick={() => appBar.menuClick(item.route)}>
+                                <Icon sx={{ marginBottom: 2, padding: 1, fontSize: 50, borderRadius: '50%', outline: `10px solid ${menu.color}` }}>
+                                  {item.icon}
+                                </Icon>
+                              </IconButton>
+                            </Badge>
+                            <Typography>{item.name}</Typography>
+                          </Stack>
+                        </Grid>
+                      )
+                    }
+                  </Grid>
+                  <Divider />
+                </Box>
+              )
+
+            }
+          </Stack>
+        </Box>
       </MuiDrawer>
 
     </>

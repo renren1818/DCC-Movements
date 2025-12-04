@@ -23,29 +23,29 @@ import LocationPinIcon from '@mui/icons-material/LocationPin';
 export default function useMap() {
 
     const { blocks, searchParams } = useBlocksContext();
-    
+
     function renderHoldingArea(side: number, block: IGridLayout) {
 
         const ha = block.HoldingAreas.find((ha) => ha.includes(`-${side}-99`));
 
         if (ha) {
             return (
-            <Paper 
-                sx={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                bgcolor: "yellow"
-                }}
-            >
-                <Typography variant="button" sx={{ writingMode: 'sideways-lr'}}>
-                {ha}
-                </Typography>
-            </Paper>
+                <Paper
+                    sx={{
+                        position: "relative",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        bgcolor: "yellow"
+                    }}
+                >
+                    <Typography variant="button" sx={{ writingMode: 'sideways-lr' }}>
+                        {ha}
+                    </Typography>
+                </Paper>
             )
         }
-    
+
     }
 
     function getBlockColors(type: BlockTypes): IBlockColors {
@@ -80,7 +80,7 @@ export default function useMap() {
 
             case BlockTypes.LOW:
             case BlockTypes.LOW_MINI:
-                
+
                 image = BlockLowDensityImage.src;
                 imageSingle = BlockLowDensityImage.src;
                 break;
@@ -117,20 +117,20 @@ export default function useMap() {
 
         return (
             <Paper
-            sx={{
-                width: '100%',
-                backgroundColor: "#f5f5f5",
-                display: "flex",
-                justifyContent: "flex-end",
-                padding: 1,
-            }}
+                sx={{
+                    width: '100%',
+                    backgroundColor: "#f5f5f5",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    padding: 1,
+                }}
             >
                 <Stack direction='column' spacing={0.75} sx={{ width: '100%', justifyContent: "flex-end" }}>
                     {(block.Sides % 2) > 0 && (
-                        <img key={0} src={imageSingle} style={{ height: '15px', width:'100%', objectFit:'fill' }} />
+                        <img key={0} src={imageSingle} style={{ height: '15px', width: '100%', objectFit: 'fill' }} />
                     )}
                     {[...Array(Math.floor(block.Sides / 2))].map((_value, index) => (
-                        <img key={index + 1} src={image} style={{ height: '15px', width:'100%', objectFit:'fill' }} />
+                        <img key={index + 1} src={image} style={{ height: '15px', width: '100%', objectFit: 'fill' }} />
                     ))}
                 </Stack>
             </Paper>
@@ -138,45 +138,45 @@ export default function useMap() {
     }
 
     function renderCode(block: IGridLayout) {
-        
+
         const colors = getBlockColors(block.BlockType);
 
         const mini =
             block.BlockType == BlockTypes.HIGH_MINI || block.BlockType == BlockTypes.LOW_MINI || block.Layout.RowSpan === 1
-            ? 20
-            : undefined;
+                ? 20
+                : undefined;
 
         return (
             <Paper
-            sx={{
-                display: "flex",
-                position: "absolute",
-                marginTop: 0.5,
-                padding: 0.25,
-                width: 18,
-                height: 18,
-                justifyContent: "center",
-                border: 3,
-                borderColor: "white",
-                backgroundColor: colors.Block,
-                left: mini,
-            }}
+                sx={{
+                    display: "flex",
+                    position: "absolute",
+                    marginTop: 0.5,
+                    padding: 0.25,
+                    width: 18,
+                    height: 18,
+                    justifyContent: "center",
+                    border: 3,
+                    borderColor: "white",
+                    backgroundColor: colors.Block,
+                    left: mini,
+                }}
             >
                 <Typography variant='body2' color='white'>
-                    <strong>{('00'+block.Code).slice(-2)}</strong>
+                    <strong>{('00' + block.Code).slice(-2)}</strong>
                 </Typography>
             </Paper>
         );
     }
 
     function renderFullness(block: IGridLayout) {
-        
+
         const colors = getBlockColors(block.BlockType);
 
         const mini =
             block.BlockType == BlockTypes.HIGH_MINI || block.BlockType == BlockTypes.LOW_MINI || block.Layout.RowSpan === 1
-            ? [20, undefined, undefined] 
-            : [undefined, undefined, 5 ];
+                ? [20, undefined, undefined]
+                : [undefined, undefined, 5];
 
         return (
             <Paper
@@ -194,9 +194,9 @@ export default function useMap() {
                     bottom: mini[2],
                 }}
             >
-            <Typography variant='caption' color='white'>
-                <strong>{block.Fullness.toFixed(1)}%</strong>
-            </Typography>
+                <Typography variant='caption' color='white'>
+                    <strong>{block.Fullness.toFixed(1)}%</strong>
+                </Typography>
             </Paper>
         );
     }
@@ -207,41 +207,41 @@ export default function useMap() {
 
             block.HasAssignedSku &&
             (
-            <Box
-                key={`package-${block.BlockId}`}
-                bgcolor={'white'}
-                style={{
-                position: 'absolute',
-                top: 10,
-                left: 10,
-                width: 24,
-                height: 24,
-                borderRadius: '50%',
-                animation: block.HasMovement ? 'heartbeatAnim 0.8s infinite' : 'none',
-                }} 
-            >
-                <img src={PackageIcon.src} style={{ width: 24, height: 24 }} />
-            </Box>
+                <Box
+                    key={`package-${block.BlockId}`}
+                    bgcolor={'white'}
+                    style={{
+                        position: 'absolute',
+                        top: 10,
+                        left: 10,
+                        width: 24,
+                        height: 24,
+                        borderRadius: '50%',
+                        animation: block.HasMovement ? 'heartbeatAnim 0.8s infinite' : 'none',
+                    }}
+                >
+                    <img src={PackageIcon.src} style={{ width: 24, height: 24 }} />
+                </Box>
             ),
 
             (
                 (searchParams.location?.block === +block.Code!)
-                || 
+                ||
                 props.skuBlocks.includes(+block.BlockId)
-            ) 
+            )
             &&
             (
                 <Box
                     key={`sku-${block.BlockId}`}
                     style={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 10,
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%',
-                    animation: 'heartbeatAnim 0.8s infinite',
-                    }} 
+                        position: 'absolute',
+                        top: 10,
+                        right: 10,
+                        width: 24,
+                        height: 24,
+                        borderRadius: '50%',
+                        animation: 'heartbeatAnim 0.8s infinite',
+                    }}
                 >
                     <LocationPinIcon color='inherit' />
                 </Box>
@@ -254,7 +254,7 @@ export default function useMap() {
     function renderBlock(props: IBlocksProps, block: IGridLayout) {
 
         return (
-            <Stack 
+            <Stack
                 direction={'row'}
                 key={block.i}
                 sx={{
@@ -267,16 +267,16 @@ export default function useMap() {
                 <Box
                     key={block.i}
                     sx={{
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    width: '100%',
-                    "&:hover": {
-                        borderRadius: 1,
-                        border: 2,
-                        borderColor: getBlockColors(block.BlockType).Block,
-                        cursor: 'pointer'
-                    },
+                        position: "relative",
+                        display: "flex",
+                        justifyContent: "center",
+                        width: '100%',
+                        "&:hover": {
+                            borderRadius: 1,
+                            border: 2,
+                            borderColor: getBlockColors(block.BlockType).Block,
+                            cursor: 'pointer'
+                        },
                     }}
                     onClick={() => props.onClick(block)}
                 >

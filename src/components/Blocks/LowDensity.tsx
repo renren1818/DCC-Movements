@@ -19,9 +19,9 @@ export default function LowDensity(props: IBlockHook) {
                 <Grid size={'auto'}>
                     {ld.sides}
                 </Grid>
-            </Grid>          
+            </Grid>
         </Box>
-           
+
     );
 
 }

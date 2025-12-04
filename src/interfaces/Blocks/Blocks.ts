@@ -88,11 +88,12 @@ export interface ILevelLocation {
   MaxPallet: number,
   LocationId: number,
   HasAssignedSku: boolean,
-  BlockTypeId:number,
+  BlockTypeId: number,
   HasMovement: boolean,
   IsAvailable: boolean,
   BlockType: string,
   LocationName: string
+  IsCompleted: boolean
 }
 
 export interface ILevelPercentByRow {

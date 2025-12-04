@@ -19,17 +19,17 @@ export default function useLowDensity(hook: IBlockHook) {
     const { searchParams } = useBlocksContext();
 
     const sideBG = [BlockTypes.LOW, BlockTypes.LOW_MINI].includes(hook.block?.BlockType ?? BlockTypes.SALVAGE) ? lowDensityBG :
-                   hook.block?.BlockType === BlockTypes.LOW_PICKING ? pickingDensityBG :
-                   salvageDensityBG;
+        hook.block?.BlockType === BlockTypes.LOW_PICKING ? pickingDensityBG :
+            salvageDensityBG;
 
-    const indicators = (row: ICommonRow) => 
+    const indicators = (row: ICommonRow) =>
         <>
-            { 
-                row.HasAssignedSku 
-                && 
-                <img src={movementPackage.src} width={18} height={18} alt="" style={{ animation: row.HasMovement ? 'heartbeatAnim 0.8s infinite' : '' }} /> 
+            {
+                row.HasAssignedSku
+                &&
+                <img src={movementPackage.src} width={18} height={18} alt="" style={{ animation: row.HasMovement ? 'heartbeatAnim 0.8s infinite' : '' }} />
             }
-            { 
+            {
                 (
                     (searchParams.sku && row.SKU.includes(+searchParams.sku!))
                     ||
@@ -37,15 +37,15 @@ export default function useLowDensity(hook: IBlockHook) {
                         (hook.block && +hook.block.Code! === searchParams.location?.block)
                         &&
                         row.Side === searchParams.location?.side
-                        && 
+                        &&
                         row.Row >= searchParams.location?.rowFrom && row.Row <= searchParams.location?.rowTo
                     )
                 )
-                && 
-                <img src={movementLocation.src} width={18} height={18} alt="" style={{ animation: 'heartbeatAnim 0.8s infinite' }} /> 
+                &&
+                <img src={movementLocation.src} width={18} height={18} alt="" style={{ animation: 'heartbeatAnim 0.8s infinite' }} />
             }
         </>
-    
+
     const sides = [];
     const rows = [];
 
@@ -55,65 +55,65 @@ export default function useLowDensity(hook: IBlockHook) {
             <Stack key={i} marginTop={i === 0 ? '60px' : '120px'} width={'45px'} spacing={0.2} paddingLeft={'10px'} justifyContent={'center'}>
                 <IconButton
                     sx={{ width: '40px', borderRadius: '10px', backgroundColor: hook.colors.block }}
-                    onClick={() => redirect(`${hook.block?.Code}/${i+1}`)}
+                    onClick={() => redirect(`${hook.block?.Code}/${i + 1}`)}
                 >
-                    <Typography variant="body2" color='white' fontWeight={'bold'}>{i+1}</Typography>
+                    <Typography variant="body2" color='white' fontWeight={'bold'}>{i + 1}</Typography>
                 </IconButton>
                 <IconButton
                     sx={{ width: '40px', borderRadius: '10px', backgroundColor: hook.colors.block }}
-                    onClick={() => redirect(`${hook.block?.Code}/${i+2}`)}
+                    onClick={() => redirect(`${hook.block?.Code}/${i + 2}`)}
                 >
-                    <Typography variant="body2" color='white' fontWeight={'bold'}>{i+2}</Typography>
+                    <Typography variant="body2" color='white' fontWeight={'bold'}>{i + 2}</Typography>
                 </IconButton>
             </Stack>
-            
+
         )
 
         rows.push(
-            <Stack 
+            <Stack
                 key={i}
-                direction={'row'} 
-                sx={{ 
+                direction={'row'}
+                sx={{
                     paddingX: '2px',
-                    paddingTop: '10px', 
-                    overflowX: 'scroll', scrollbarWidth: 'thin' , scrollbarColor: `${hook.colors.block} transparent`, 
+                    paddingTop: '10px',
+                    overflowX: 'scroll', scrollbarWidth: 'thin', scrollbarColor: `${hook.colors.block} transparent`,
                     background: `url(${sideBG.src}) no-repeat left center`, backgroundSize: '100% 60px'
                 }}
-            >                
+            >
                 {
-                    (hook.items[i] as ICommonSide).rows.map((row: ICommonRow, index: number) => 
+                    (hook.items[i] as ICommonSide).rows.map((row: ICommonRow, index: number) =>
                         <Stack key={`${row.Side}/${row.Row}`} sx={{ minWidth: '75px', width: `calc((100% - 20px) / ${(hook.items[i] as ICommonSide).rows.length})`, height: '100%', margin: '1px', alignItems: 'center' }}>
-                                <Box sx={{ display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px'}}>
-                                    { indicators(row) }
-                                </Box>
-                                <Box sx={{ marginBottom: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px', backgroundColor: hook.colors.fullness}}>
-                                    <Typography variant="caption">{row.Fullness}%</Typography>
-                                </Box>
-                                <Box sx={{ padding: '2px 0px', width: '100%', height: '25px', backgroundRepeat: "no-repeat", backgroundSize: '100% 100%', backgroundImage: `url(${slotImg.src})`, margin: '0px' }}>
-                                    <Stack width={'100%'} height={'100%'} justifyContent={'space-between'}>
-                                        <Typography variant="caption" paddingRight={'6px'} fontWeight={'bold'}>{row.Row}</Typography>
-                                    </Stack>
-                                </Box>
-                                <Box sx={{ padding: '2px 0px', width: '100%', height: '25px', backgroundRepeat: "no-repeat", backgroundSize: '100% 100%', backgroundImage: `url(${slotImg.src})`, margin: '0px' }}>
-                                    <Stack width={'100%'} height={'100%'} justifyContent={'space-between'}>
-                                        <Typography variant="caption" paddingRight={'6px'} fontWeight={'bold'}>{row.Row}</Typography>
-                                    </Stack>
-                                </Box>
-                                <Box sx={{ marginTop: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px', backgroundColor: hook.colors.fullness}}>
-                                    <Typography variant="caption">{(hook.items[i+1] as ICommonSide).rows[index].Fullness}%</Typography>
-                                </Box>
-                                <Box sx={{ marginBottom: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px'}}>
-                                    { indicators((hook.items[i+1] as ICommonSide).rows[index]) }
-                                </Box>
+                            <Box sx={{ display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px' }}>
+                                {indicators(row)}
+                            </Box>
+                            <Box sx={{ marginBottom: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px', backgroundColor: hook.colors.fullness }}>
+                                <Typography variant="caption">{row.Fullness}%</Typography>
+                            </Box>
+                            <Box sx={{ padding: '2px 0px', width: '100%', height: '25px', backgroundRepeat: "no-repeat", backgroundSize: '100% 100%', backgroundImage: `url(${slotImg.src})`, margin: '0px' }}>
+                                <Stack width={'100%'} height={'100%'} justifyContent={'space-between'}>
+                                    <Typography variant="caption" paddingRight={'6px'} fontWeight={'bold'}>{row.Row}</Typography>
+                                </Stack>
+                            </Box>
+                            <Box sx={{ padding: '2px 0px', width: '100%', height: '25px', backgroundRepeat: "no-repeat", backgroundSize: '100% 100%', backgroundImage: `url(${slotImg.src})`, margin: '0px' }}>
+                                <Stack width={'100%'} height={'100%'} justifyContent={'space-between'}>
+                                    <Typography variant="caption" paddingRight={'6px'} fontWeight={'bold'}>{row.Row}</Typography>
+                                </Stack>
+                            </Box>
+                            <Box sx={{ marginTop: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px', backgroundColor: hook.colors.fullness }}>
+                                <Typography variant="caption">{(hook.items[i + 1] as ICommonSide).rows[index].Fullness}%</Typography>
+                            </Box>
+                            <Box sx={{ marginBottom: '5px', display: 'flex', color: 'white', justifyContent: 'center', alignItems: 'center', width: 'calc(100% - 8px)', height: '25px' }}>
+                                {indicators((hook.items[i + 1] as ICommonSide).rows[index])}
+                            </Box>
                         </Stack>
                     )
                 }
-            </Stack>       
+            </Stack>
         );
 
     }
 
-        
+
     return {
         sides,
         rows

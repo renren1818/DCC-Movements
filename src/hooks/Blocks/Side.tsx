@@ -96,6 +96,7 @@ export default function useSide(hook: IBlockHook) {
     const isSelected = (locationId: number) => locations.items.find((l) => l.id === locationId);
 
     const IsNotAvailable = (slot: ILevelLocation) => {
+        console.log(slot)
 
         let error = 0;
 
